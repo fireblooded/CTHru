@@ -3,12 +3,11 @@ import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from 'src/layouts/dashboard';
 
-export const IndexPage = lazy(() => import('src/pages/app'));
-export const BlogPage = lazy(() => import('src/pages/blog'));
-export const UserPage = lazy(() => import('src/pages/user'));
 export const LoginPage = lazy(() => import('src/pages/login'));
-export const ProductsPage = lazy(() => import('src/pages/products'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
+export const PledgesPage = lazy(() => import('src/pages/pledges-page'))
+export const DetailsPage = lazy(() => import('src/pages/details'))
+export const CreatePledgesPage = lazy(() => import('src/pages/create-pledges-page'))
 
 // ----------------------------------------------------------------------
 
@@ -23,10 +22,10 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { element: <PledgesPage />, index: true },
+        { path: 'pledges', element: <PledgesPage/> },
+        { path: 'pledges/:uid', element: <DetailsPage/> },
+        { path: 'pledges/create', element: <CreatePledgesPage/>}
       ],
     },
     {
@@ -40,7 +39,7 @@ export default function Router() {
     {
       path: '*',
       element: <Navigate to="/404" replace />,
-    },
+    }
   ]);
 
   return routes;
